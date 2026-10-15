@@ -13,8 +13,8 @@
         "Control"
       ],
       "icon": "\ud83d\udee1",
-      "demo": "https://we-do-care-global.github.io/agentguard/",
-      "github": "https://github.com/WeDoCareGlobal-CC/agentguard",
+      "demo": "https://WeDoCareGlobal.github.io/agentguard-next/",
+      "github": "https://github.com/WeDoCareGlobal/agentguard-next",
       "dois": [
         "10.5281/zenodo.23174494",
         "10.5281/zenodo.23108383",
@@ -36,8 +36,8 @@
         "Approve"
       ],
       "icon": "\u25eb",
-      "demo": "https://foundationcentar-demo-rkwero.v2.appdeploy.ai/",
-      "github": "https://github.com/WeDoCareGlobal-CC/FoundationCentar",
+      "demo": "https://WeDoCareGlobal.github.io/FoundationCentar-Next/",
+      "github": "https://github.com/WeDoCareGlobal/FoundationCentar-Next",
       "dois": [
         "10.5281/zenodo.23174502",
         "10.5281/zenodo.23073887"
@@ -57,8 +57,8 @@
         "Proof"
       ],
       "icon": "\u2315",
-      "demo": "https://we-do-care-global.github.io/enterprise-hybrid-rag/",
-      "github": "https://github.com/WeDoCareGlobal-CC/enterprise-hybrid-rag",
+      "demo": "https://WeDoCareGlobal.github.io/enterprise-hybrid-rag-next/",
+      "github": "https://github.com/WeDoCareGlobal/enterprise-hybrid-rag-next",
       "dois": [
         "10.5281/zenodo.23174497",
         "10.5281/zenodo.22945802",
@@ -79,8 +79,8 @@
         "Reporting"
       ],
       "icon": "\u25a5",
-      "demo": "https://we-do-care-global.github.io/agent-eval/",
-      "github": "https://github.com/WeDoCareGlobal-CC/agent-eval",
+      "demo": "https://WeDoCareGlobal.github.io/agent-eval-next/",
+      "github": "https://github.com/WeDoCareGlobal/agent-eval-next",
       "dois": [
         "10.5281/zenodo.23174495",
         "10.5281/zenodo.23108384",
@@ -102,8 +102,8 @@
         "Verification"
       ],
       "icon": "\ud83d\udd10",
-      "demo": "https://we-do-care-global.github.io/agentvault/",
-      "github": "https://github.com/WeDoCareGlobal-CC/agentvault",
+      "demo": "https://WeDoCareGlobal.github.io/AgentVault-Next/",
+      "github": "https://github.com/WeDoCareGlobal/AgentVault-Next",
       "dois": [
         "10.5281/zenodo.23174499",
         "10.5281/zenodo.23174505",
@@ -125,8 +125,8 @@
         "Compliance"
       ],
       "icon": "\u2695",
-      "demo": "https://we-do-care-global.github.io/pharma-intelligence-os/",
-      "github": "https://github.com/WeDoCareGlobal-CC/pharma-intelligence-os",
+      "demo": "https://WeDoCareGlobal.github.io/Pharma-Intelligence-Os-Next/",
+      "github": "https://github.com/WeDoCareGlobal/Pharma-Intelligence-Os-Next",
       "dois": [
         "10.5281/zenodo.23174501",
         "10.5281/zenodo.23174507",
@@ -137,7 +137,7 @@
     }
   ],
   "orcid": "https://orcid.org/0009-0009-8515-2727",
-  "github_org": "https://github.com/we-do-care-global",
+  "github_org": "https://github.com/WeDoCareGlobal",
   "zenodo_synced_dois": {
     "agentguard": [
       "10.5281/zenodo.23174494",
