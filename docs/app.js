@@ -1,36 +1,91 @@
-const systems=[
-{name:'AgentGuard',category:'Security',group:'control',icon:'◇',repo:'agentguard-next',doi:'22945778',desc:'Make agent tool calls subject to explicit policies, limits and inspectable audit records.',focus:['Policy evaluation for agent tool calls','Rate-limiting boundaries','Hash-linked audit records'],note:'Rate limits and audit scope depend on the implementation and deployment. A demonstration endpoint does not establish production security.',use:'Start with the boundaries around what your agents can do. Review policies and audit behavior before connecting privileged tools.'},
-{name:'FoundationCentar',category:'Governance',group:'control',icon:'▤',repo:'FoundationCentar-Next',doi:'23073888',desc:'Explore governance-first foundations for operational AI deployment and accountability.',focus:['Governance-oriented orchestration','Operational control-plane concepts','Explicit accountability and oversight'],note:'Deployment architecture and integrations require project-level validation. This website does not connect to an orchestrator.',use:'Use governance as the starting point for coordinating agents, defining ownership and planning human review.'},
-{name:'Enterprise Hybrid-RAG',category:'Retrieval',group:'knowledge',icon:'⌘',repo:'enterprise-hybrid-rag-next',doi:'22945802',desc:'Connect enterprise knowledge with hybrid lexical and dense retrieval, fused through RRF.',focus:['BM25 lexical retrieval','Dense semantic retrieval','Reciprocal Rank Fusion'],note:'Retrieval quality depends on your documents, indexing and evaluation. No performance or answer-accuracy benchmark is asserted here.',use:'Start with your knowledge sources. Compare lexical and semantic retrieval against representative questions before choosing your configuration.'},
-{name:'Agent Eval',category:'Evaluation',group:'quality',icon:'◎',repo:'agent-eval-next',doi:'22945804',desc:'Make agentic workflows easier to inspect through evidence-driven metrics and execution assessment.',focus:['Agent workflow assessment','Evaluation metrics','Traceable execution evidence'],note:'Published evaluation tooling does not certify model correctness. Test coverage, datasets and acceptance thresholds need to fit your use case.',use:'Define what good performance means, assemble representative tasks and inspect failures before increasing agent autonomy.'},
-{name:'AgentVault',category:'Assurance',group:'quality',icon:'▣',repo:'AgentVault-Next',doi:'22983557',desc:'Bring tool registration, secret management and bounded execution into a clearer control layer.',focus:['Tool registry','Secret management','Bounded execution and audit trails'],note:'Secret handling and access isolation must be reviewed in the target environment. This website stores no secrets and runs no agent tools.',use:'Review how tools are registered, credentials are handled and execution boundaries are enforced across your agent environment.'},
-{name:'Pharma Intelligence OS',category:'Regulatory intelligence',group:'knowledge',icon:'✳',repo:'Pharma-Intelligence-Os-Next',doi:'22983388',desc:'Explore a dedicated workspace for pharmacovigilance and regulatory intelligence workflows.',focus:['Case-review workflow concepts','Regulatory information organization','Human verification of domain outputs'],note:'Software demonstration only. Not medical advice, a validated regulatory submission system or an autonomous clinical decision tool. Human verification is required.',use:'Explore how case review and regulatory evidence can be organized, while keeping qualified human review central to every consequential decision.'}
+'use strict';
+// Project cards are ordinary HTML links. JavaScript only enhances filtering.
+const filterGroup = document.querySelector('.filters');
+if (filterGroup) {
+  filterGroup.hidden = false;
+  filterGroup.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+    filterGroup.querySelectorAll('button').forEach(other => {
+      other.classList.toggle('active', other === button);
+      other.setAttribute('aria-pressed', String(other === button));
+    });
+    let visible = 0;
+    document.querySelectorAll('.card').forEach(card => {
+      card.hidden = button.dataset.filter !== 'all' && card.dataset.group !== button.dataset.filter;
+      if (!card.hidden) visible++;
+    });
+    document.querySelector('#filter-status').textContent = `${visible} systems shown.`;
+  }));
+}
+const choices = document.querySelector('.choices');
+const recommendations = [
+  ['AgentGuard', 'agentguard', 'Security', 'Start with the boundaries around what your agents can do. Review policies and audit behavior before connecting privileged tools.'],
+  null,
+  ['Enterprise Hybrid-RAG', 'enterprise-hybrid-rag', 'Retrieval', 'Start with your knowledge sources. Compare retrieval against representative questions before choosing a configuration.'],
+  ['Agent Eval', 'agent-eval', 'Evaluation', 'Define acceptance criteria, assemble representative tasks and inspect failures before increasing autonomy.'],
+  null,
+  ['Pharma Intelligence OS', 'pharma-intelligence-os', 'Regulatory intelligence', 'Explore case review and regulatory evidence while keeping qualified human review central.']
 ];
-const icons=[`<path d="M16 3 27 7v9c0 7-11 13-11 13S5 23 5 16V7Z"/><path d="m10 16 4 4 8-9"/>`, `<path d="m3 10 13-7 13 7M5 12h22M7 13v12m9-12v12m9-12v12M3 29h26M5 25h22"/>`, `<ellipse cx="16" cy="7" rx="11" ry="4"/><path d="M5 7v18c0 6 22 6 22 0V7M5 16c0 6 22 6 22 0"/>`, `<path d="M4 4v24h25M9 21v-7m7 7V8m7 13v-11"/><circle cx="24" cy="6" r="3"/>`, `<rect x="5" y="12" width="22" height="17" rx="2"/><path d="M10 12V8a6 6 0 0 1 12 0v4M16 19v5"/><circle cx="16" cy="19" r="1"/>`, `<path d="M12 3h8v9h9v8h-9v9h-8v-9H3v-8h9Z"/>`];
-systems.forEach((s,i)=>s.icon=`<svg viewBox="0 0 32 32" aria-hidden="true">${icons[i]}</svg>`);
-const cards=document.querySelector('#cards');
-cards.innerHTML=systems.map((s,i)=>`<article class="card" data-group="${s.group}"><div class="card-top"><span>0${i+1} / ${s.category.toUpperCase()}</span><span>↗</span></div><div class="glyph" aria-hidden="true">${s.icon}</div><h3>${s.name}</h3><p>${s.desc}</p><div class="card-bottom"><span>PUBLISHED PORTFOLIO</span><button data-id="${i}" aria-label="Explore ${s.name}">Explore system ↗</button></div></article>`).join('');
-const dialog=document.querySelector('#detail');let lastFocus;
-function openDetail(i){const s=systems[i];lastFocus=document.activeElement;document.querySelector('#detail-content').innerHTML=`<div class="glyph" aria-hidden="true">${s.icon}</div><div class="detail-eyebrow">0${Number(i)+1} / ${s.category.toUpperCase()}</div><h2>${s.name}</h2><p>${s.desc}</p><h3>Published project focus</h3><ul>${s.focus.map(x=>`<li>${x}</li>`).join('')}</ul><p class="disclaimer">${s.note}</p><div class="actions"><a class="button primary" href="https://wedocareglobal.github.io/${s.repo}/" target="_blank" rel="noopener">Open project demo ↗</a><a class="button" href="https://github.com/WeDoCareGlobal/${s.repo}" target="_blank" rel="noopener">GitHub ↗</a><a class="button" href="https://doi.org/10.5281/zenodo.${s.doi}" target="_blank" rel="noopener">Zenodo DOI ↗</a></div><p style="font-size:10px">Links are taken from the current public portfolio. Availability of external demonstrations can change.</p>`;if(!dialog.open){dialog.showModal();document.body.classList.add('modal-open')}}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openDetail(Number(b.dataset.id))});
-document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');lastFocus?.focus()});
-document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});document.querySelectorAll('.card').forEach(c=>{c.hidden=b.dataset.filter!=='all'&&c.dataset.group!==b.dataset.filter})}));
-function recommend(i){const s=systems[i];document.querySelector('#recommendation').innerHTML=`<div class="eyebrow gold">YOUR STARTING POINT / ${s.category.toUpperCase()}</div><h3>${s.name}</h3><p>${s.use}</p><button class="button" data-id="${i}">Explore ${s.name} <span>↗</span></button>`}
-recommend(0);document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-choice]').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b))});recommend(Number(b.dataset.choice))}));
-const menu=document.querySelector('.menu'),nav=document.querySelector('nav');
-function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}
-menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
-document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menu.contains(e.target))closeMenu()});
-window.matchMedia('(min-width: 769px)').addEventListener('change',e=>{if(e.matches)closeMenu()});
-document.querySelector('#contact-form').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.target);const subject=`We Do Care Global inquiry: ${data.get('interest')}`;const body=`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nInterest: ${data.get('interest')}\n\n${data.get('message')}`;window.location.href=`mailto:emir@wedocare-global.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;document.querySelector('#form-status').textContent='Your email app should open with a prepared draft. Nothing has been sent. If it does not open, use the email address shown alongside this form.'});
-
-const brandVideo=document.querySelector('#brand-video');const motionToggle=document.querySelector('#motion-toggle');const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-function updateMotion(){motionToggle.textContent=brandVideo.paused?'Play motion ▷':'Pause motion Ⅱ';motionToggle.setAttribute('aria-label',brandVideo.paused?'Play brand animation':'Pause brand animation')}
-if(reducedMotion.matches){brandVideo.pause();brandVideo.removeAttribute('autoplay')}
-brandVideo.addEventListener('play',updateMotion);brandVideo.addEventListener('pause',updateMotion);motionToggle.addEventListener('click',()=>{if(brandVideo.paused){brandVideo.play().catch(()=>{motionToggle.textContent='Play motion ▷'})}else{brandVideo.pause()} });updateMotion();
-
-// Preview resilience: communicate media loading failures without hiding the design.
-brandVideo.addEventListener('error',()=>{motionToggle.textContent='Video unavailable';motionToggle.disabled=true;motionToggle.setAttribute('aria-label','Brand video unavailable')});
-brandVideo.querySelector('source')?.addEventListener('error',()=>{motionToggle.textContent='Video unavailable';motionToggle.disabled=true;motionToggle.setAttribute('aria-label','Brand video unavailable')});
+if (choices) {
+  choices.hidden = false;
+  choices.querySelectorAll('[data-choice]').forEach(button => button.addEventListener('click', () => {
+    choices.querySelectorAll('button').forEach(other => { other.classList.toggle('selected', other === button); other.setAttribute('aria-pressed', String(other === button)); });
+    const [name, slug, category, description] = recommendations[Number(button.dataset.choice)];
+    const panel = document.querySelector('#recommendation');
+    panel.replaceChildren();
+    const eyebrow = document.createElement('div'); eyebrow.className = 'eyebrow gold'; eyebrow.textContent = `YOUR STARTING POINT / ${category.toUpperCase()}`;
+    const heading = document.createElement('h3'); heading.textContent = name;
+    const paragraph = document.createElement('p'); paragraph.textContent = description;
+    const link = document.createElement('a'); link.className = 'button'; link.href = `${slug}.html`; link.textContent = `Explore ${name} ↗`;
+    panel.append(eyebrow, heading, paragraph, link);
+  }));
+}
+const form = document.querySelector('#contact-form');
+if (form) {
+  form.querySelectorAll('[data-enhanced]').forEach(button => { button.hidden = false; });
+  form.addEventListener('submit', e => e.preventDefault());
+  const status = document.querySelector('#form-status');
+  function inquiry() {
+    if (!form.reportValidity()) return null;
+    const data = new FormData(form);
+    const subject = `We Do Care Global inquiry: ${data.get('interest')}`;
+    const body = `Name: ${String(data.get('name')).trim()}\nEmail: ${String(data.get('email')).trim()}\nInterest: ${data.get('interest')}\n\n${String(data.get('message')).trim()}`;
+    const text = `To: emir@wedocare-global.com\nSubject: ${subject}\n\n${body}`;
+    document.querySelector('#prepared-inquiry').value = text;
+    document.querySelector('#inquiry-preview').hidden = false;
+    return {subject, body, text};
+  }
+  document.querySelector('#prepare-inquiry').addEventListener('click', () => {
+    const draft = inquiry(); if (!draft) return;
+    const url = `mailto:emir@wedocare-global.com?subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
+    if (url.length > 1800) { status.textContent = 'Your inquiry is ready below. For long messages, copy or download it and paste it into your email service. Nothing has been sent.'; return; }
+    status.textContent = 'Your email app should open with a draft. Nothing has been sent. If it does not open, copy or download the inquiry below.';
+    window.location.href = url;
+  });
+  document.querySelector('#copy-inquiry').addEventListener('click', async () => {
+    const draft = inquiry(); if (!draft) return;
+    try { await navigator.clipboard.writeText(draft.text); status.textContent = 'Inquiry copied. Paste it into your email service and send it when ready. Nothing has been sent.'; }
+    catch { const field = document.querySelector('#prepared-inquiry'); field.focus(); field.select(); status.textContent = 'Automatic copying was unavailable. The inquiry text is selected; copy it manually. Nothing has been sent.'; }
+  });
+  document.querySelector('#download-inquiry').addEventListener('click', () => {
+    const draft = inquiry(); if (!draft) return;
+    const url = URL.createObjectURL(new Blob([draft.text], {type:'text/plain;charset=utf-8'}));
+    const link = document.createElement('a'); link.href = url; link.download = 'we-do-care-inquiry.txt'; document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    status.textContent = 'Inquiry download prepared on your device. Nothing has been sent.';
+  });
+}
+const video = document.querySelector('#brand-video');
+const motion = document.querySelector('#motion-toggle');
+if (video && motion) {
+  motion.hidden = false;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const update = () => { motion.textContent = video.paused ? 'Play motion ▷' : 'Pause motion Ⅱ'; motion.setAttribute('aria-label', video.paused ? 'Play brand animation' : 'Pause brand animation'); };
+  const play = () => video.play().catch(update);
+  video.addEventListener('play', update); video.addEventListener('pause', update);
+  motion.addEventListener('click', () => { if (video.paused) play(); else video.pause(); });
+  reduced.addEventListener('change', e => { if (e.matches) video.pause(); });
+  const unavailable = () => { motion.textContent = 'Video unavailable'; motion.disabled = true; motion.setAttribute('aria-label', 'Brand video unavailable'); };
+  video.addEventListener('error', unavailable); video.querySelector('source')?.addEventListener('error', unavailable);
+  update();
+  if (!reduced.matches && !navigator.connection?.saveData) play();
+}
