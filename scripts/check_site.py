@@ -37,6 +37,7 @@ for p,doc in files.items():
   if u.fragment and target in files and unquote(u.fragment) not in files[target].ids:errors.append(f'{p}: missing fragment {ref}')
   checked+=1
 for css in root.glob('*.css'):
+ if 'fonts.googleapis.com' in css.read_text() or '&family=' in css.read_text():errors.append(f'{css}: leftover external font import')
  for ref in re.findall(r'url\([\"\x27]?([^\)\"\x27]+)',css.read_text()):
   if not urlsplit(ref).scheme and not (css.parent/ref).exists():errors.append(f'{css}: missing resource {ref}')
 if files[root/'index.html'].card_count!=6:errors.append('Home must have six static cards')
