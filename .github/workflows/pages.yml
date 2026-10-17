@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - docs/**
+      - scripts/check_site.py
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -23,10 +24,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Validate static site
+        run: |
+          python3 scripts/check_site.py docs
+          node --check docs/app.js
+          node --check docs/shared.js
+          node --check docs/project-demos.js
       - name: Trigger Pages build via API
         run: |
           echo "Triggering GitHub Pages build for main:/docs"
-          curl -s -X POST \
+          curl --fail-with-body --silent --show-error -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/pages/builds
