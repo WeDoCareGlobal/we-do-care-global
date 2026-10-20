@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "agentvault": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@we-do-care/agentvault-server"
+      ],
+      "env": {
+        "AGENTVAULT_API_KEY": "${AGENTVAULT_API_KEY:?Set your AgentVault API key}",
+        "OMNIGUARD_URL": "http://localhost:8080/v1",
+        "OMNIGUARD_API_KEY": "${OMNIGUARD_API_KEY:?Set OmniGuard API key}"
+      },
+      "description": "AgentVault MCP server: tool permissions, secrets management and governed AI-to-tool execution with OmniGuard security enforcement."
+    }
+  }
+}
