@@ -115,6 +115,8 @@ html {
 }
 
 body {
+  padding-left: 16px;
+  padding-right: 16px;
   margin: 0;
   background: var(--ink);
   color: var(--text);
@@ -415,12 +417,25 @@ table {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: color-mix(in srgb, var(--brass) 5%, var(--ink) 95%); /* brass-tinted dark background */
+  background: color-mix(in srgb, var(--brass) 3%, var(--ink) 97%); /* slightly darker brass tint for better logo contrast */
   backdrop-filter: saturate(150%) blur(14px);
   border-bottom: 1px solid var(--line-soft);
 }
 
 .masthead-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 74px;
+}
+
+  /* Logo styling - make it more visible */
+  .masthead .brand img {
+    width: 80px;  /* slightly larger than 76px */
+    height: 80px;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.05);  /* boost visibility */
+  }
   display: flex;
   align-items: center;
   gap: 28px;
@@ -441,6 +456,17 @@ table {
   border: 1px solid rgba(200, 164, 92, 0.45);
 }
 .brand-text {
+  display: block;
+  font: 600 12px/1.15 var(--sans);
+  letter-spacing: 0.16em;
+  color: var(--on-bone); /* was var(--muted) */
+  margin-top: 2px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* add shadow for readability */
+  display: block;
+  font: 600 12px/1.15 var(--sans);
+  letter-spacing: 0.16em;
+  color: var(--on-bone);  /* ensure readability over logo */
+  margin-top: 2px;
   display: block;
   font: 600 12px/1.15 var(--sans);
   letter-spacing: 0.16em;
@@ -749,6 +775,8 @@ table {
 }
 
 .map-body {
+  padding-left: 16px;
+  padding-right: 16px;
   padding: 22px 24px;
   display: grid;
   gap: 12px;
@@ -763,6 +791,8 @@ table {
   border-right-color: transparent;
 }
 .map-inspect .map-body {
+  padding-left: 16px;
+  padding-right: 16px;
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -1137,6 +1167,8 @@ table {
   color: var(--dim);
 }
 .trace-body {
+  padding-left: 16px;
+  padding-right: 16px;
   padding: 18px 16px;
   display: grid;
   gap: 10px;
@@ -2276,5 +2308,13 @@ table {
   }
   .foot ul {
     gap: 2px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
