@@ -1,0 +1,51 @@
+/* Ice Blue extension for FoundationCentar and Pharma Intelligence OS.
+   Scoped to these pages; existing page content and interactions remain unchanged. */
+:root {
+  --ink:#0e1217;
+  --ink-2:#11171d;
+  --surface:#151d25;
+  --surface-2:#1b2630;
+  --surface-3:#24313d;
+  --line:#334552;
+  --line-soft:#263541;
+  --bone:#edf3f7;
+  --bone-2:#e2ebf2;
+  --bone-line:#c7d6e2;
+  --on-bone:#142431;
+  --on-bone-muted:#485d6d;
+  --text:#f0f5fa;
+  --muted:#b1c1d0;
+  --dim:#829aab;
+  --brass:#9bc8ee;
+  --brass-2:#c9e4f9;
+  --brass-dim:rgba(155,200,238,.16);
+}
+html { color-scheme:dark; }
+body { background:#0e1217; }
+::selection { background:var(--brass); color:#142431; }
+:focus-visible { outline-color:var(--brass-2); }
+.masthead { background:rgba(14,18,23,.96); border-bottom-color:var(--line-soft); }
+.brand-text,.brand-sub { color:var(--text); }
+.mast-nav a:hover,.breadcrumb:hover { color:var(--brass-2); }
+.btn-primary { background:var(--brass); color:#112432; border-color:var(--brass); }
+.btn-primary:hover { background:var(--brass-2); color:#112432; }
+.label,.breadcrumb { color:var(--brass); }
+.page-head { position:relative; isolation:isolate; }
+.page-head::before {
+  content:""; position:absolute; inset:-24px -10% auto 28%; height:320px;
+  z-index:-1; pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(102,166,212,.13),transparent 67%);
+}
+.page-head h1 { color:var(--brass); }
+.page-head .lede { color:var(--muted); }
+.tag { border-color:var(--line); }
+.tag-warn { color:var(--warn); }
+.band { border-color:var(--line-soft); }
+.card,.panel,.surface,.feature-card,.metric-card,.step-card {
+  border-color:var(--line); background-color:var(--surface);
+}
+a { text-underline-offset:3px; }
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { transition:none!important; animation:none!important; }
+}
