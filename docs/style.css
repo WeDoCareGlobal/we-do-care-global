@@ -415,7 +415,7 @@ table {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: color-mix(in srgb, var(--ink) 92%, transparent);
+  background: color-mix(in srgb, var(--brass) 5%, var(--ink) 95%); /* brass-tinted dark background */
   backdrop-filter: saturate(150%) blur(14px);
   border-bottom: 1px solid var(--line-soft);
 }
@@ -444,6 +444,7 @@ table {
   display: block;
   font: 600 12px/1.15 var(--sans);
   letter-spacing: 0.16em;
+  color: var(--on-bone); /* improved readability */
 }
 .brand-sub {
   display: block;
@@ -597,6 +598,7 @@ table {
 .hero h1 {
   margin: 22px 0 24px;
   max-width: 15ch;
+  color: var(--brass); /* warm gold for headlines */
 }
 
 .hero .lede {
@@ -624,6 +626,7 @@ table {
 .hero-facts strong {
   display: block;
   font: 400 26px/1.1 var(--serif);
+  color: var(--ok); /* green accent */
   color: var(--brass-2);
 }
 .hero-facts span {
