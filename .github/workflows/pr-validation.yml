@@ -1,0 +1,26 @@
+name: Pull request static validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'scripts/check_site.py'
+      - '.github/workflows/pr-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check static site
+        run: python3 scripts/check_site.py docs
+      - name: Check JavaScript syntax
+        run: |
+          node --check docs/app.js
+          node --check docs/shared.js
+          node --check docs/project-demos.js

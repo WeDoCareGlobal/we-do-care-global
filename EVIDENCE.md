@@ -4,6 +4,9 @@
 
 ## Verified Zenodo records (API-checked 2026-10-08)
 
+**Verification boundary (documentation updated 2026-10-21):** The table preserves historical API checks from 2026-10-08; this edit does not constitute a fresh Zenodo API verification. Publication records establish provenance only. They do not independently establish security assurance, production deployment, functional backend integrations, SLA, or benchmark performance. For current operational status, verify deployments and tests separately in [STATUS.md](STATUS.md).
+
+
 | Project | Version DOI | Concept DOI | Date | Version | Creators | License | Status |
 |---|---|---|---|---|---|---|---|
 | AgentGuard | [10.5281/zenodo.22945778](https://doi.org/10.5281/zenodo.22945778) | 10.5281/zenodo.22945777 | 2026-09-24 | v0.1.0 | Perla, Emir | Apache-2.0 | ✅ Published |
@@ -17,9 +20,9 @@
 | Portal (current) | [10.5281/zenodo.23217953](https://doi.org/10.5281/zenodo.23217953) | — | 2026-10-01 | v1.0.0 | Perla Emir, We Do Care Global | Apache-2.0 | ✅ Published, canonical portal DOI |
 
 ## Known issues (fix queue)
-- `22983602` → Zenodo API 302 to `22983603` (merged/deleted). Remove from READMEs.
-- `22983604` → 404. Remove from READMEs until re-deposited.
-- Portal README table reuses `23073888` for both FoundationCentar AND Hybrid-RAG — Hybrid-RAG must be `22945802`.
+- `22983602` → Zenodo API 302 to `22983603` (merged/deleted) at last check. Removed from the root README; inspect other project READMEs separately.
+- `22983604` → 404 at last check. Removed from the root README; inspect other project READMEs separately.
+- Historical portal README inconsistency: `23073888` was reused for FoundationCentar and Hybrid-RAG; Hybrid-RAG's recorded DOI is `22945802`. The root README now uses `22945802`.
 - `23073888` metadata version `vv0.1.0` — correct to `v0.1.0` on next release.
 - `agentproof` has NO DOI yet — deposit as `v1.0.0` after pushing LICENSE + citation.cff from this pack.
 
