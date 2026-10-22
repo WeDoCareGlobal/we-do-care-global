@@ -1,0 +1,14 @@
+{
+  "name": "we-do-care-global",
+  "version": "1.0.0",
+  "description": "Autonomous AI governance from first principles",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-vercel.mjs",
+    "test": "python3 scripts/check_site.py docs",
+    "check": "node --check scripts/build-vercel.mjs && python3 scripts/check_site.py docs"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.3.1"
+  }
+}
