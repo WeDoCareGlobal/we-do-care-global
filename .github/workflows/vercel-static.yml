@@ -18,3 +18,5 @@ jobs:
       - run: node scripts/build-vercel.mjs
       - name: Validate published source
         run: python3 scripts/check_site.py docs
+      - name: Validate generated Vercel output
+        run: python3 scripts/check_vercel_output.py .vercel-site
