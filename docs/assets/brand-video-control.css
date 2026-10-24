@@ -1,0 +1,13 @@
+/* Explicit video play control: usable even where autoplay is restricted. */
+.film-frame { position: relative; }
+.film-video-play {
+  position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+  z-index: 8; min-width: 156px; padding: 15px 23px;
+  border: 1px solid rgba(255,255,255,.48); border-radius: 999px;
+  background: rgba(9,19,28,.88); color: #fff;
+  font: 600 15px/1.2 system-ui, sans-serif; cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0,0,0,.4);
+}
+.film-video-play:hover, .film-video-play:focus-visible { background: #23455d; outline: 2px solid #c9e4f9; outline-offset: 2px; }
+.film-video-play:disabled { opacity: .75; cursor: progress; }
+.film-video-play[hidden] { display: none !important; }
