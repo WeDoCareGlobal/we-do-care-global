@@ -12,6 +12,7 @@
 <link href="assets/logo-small.webp" rel="icon"/>
 <link rel="stylesheet" href="assets/brand-video-control.css"/>
 <script defer src="assets/brand-video-control.js"></script>
+<script defer src="assets/contact-crm.js"></script>
 <style>/* ==========================================================================
    We Do Care Global — design system v5
    Warm graphite + bone + brass. Serif display, sans UI, mono technical.
@@ -2725,9 +2726,14 @@ html[data-palette=blue]{--brass:#9bc8ee;--brass-2:#c9e4f9;--brass-dim:rgba(155,2
 <label for="message">Your challenge</label>
 <textarea id="message" maxlength="4000" name="message" placeholder="Tell us what you're trying to build or improve." required="" rows="4"></textarea>
 </div>
-<p class="form-note">This form prepares an email in your mail app. It does not send or save your details on a server. Copy and download options work on your device. Please omit confidential information.</p>
+<p class="form-note">Choose Send inquiry securely to submit to our HubSpot contact system, or Prepare your inquiry to open an email draft. Only submit information needed for us to respond. Please omit confidential information.</p>
+<div class="field" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden"><label for="company_website">Website (leave blank)</label><input id="company_website" name="company_website" tabindex="-1" autocomplete="off"/></div>
+<div class="field">
+<label><input type="checkbox" name="contact_consent" required/> I agree that We Do Care Global may process my details only to respond to this inquiry.</label>
+</div>
 <div class="form-actions">
-<button class="btn btn-primary" data-enhanced="" hidden="" id="prepare-inquiry" type="button">Prepare your inquiry <span aria-hidden="true">↗</span></button>
+<button class="btn btn-primary" id="send-crm-inquiry" type="button">Send inquiry securely <span aria-hidden="true">↗</span></button>
+<button class="btn" data-enhanced="" hidden="" id="prepare-inquiry" type="button">Prepare your inquiry <span aria-hidden="true">↗</span></button>
 <button class="btn" data-enhanced="" hidden="" id="copy-inquiry" type="button">Copy inquiry</button>
 <button class="btn" data-enhanced="" hidden="" id="download-inquiry" type="button">Download inquiry</button>
 </div>
