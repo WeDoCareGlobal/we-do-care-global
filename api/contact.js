@@ -25,15 +25,15 @@ module.exports = async function handler(req, res) {
   const name = String(data.name || '').trim(), email = String(data.email || '').trim();
   const interest = String(data.interest || '').trim(), message = String(data.message || '').trim();
   if (!data.consent || name.length < 2 || name.length > 120 ||
-      !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || email.length > 254 ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 ||
       interest.length > 150 || message.length < 5 || message.length > 4000 ||
-      /[\\r\\n]/.test(name + email)) return res.status(400).json({ error: 'invalid_fields' });
-  const [firstname, ...other] = name.split(/\\s+/);
+      /[\r\n]/.test(name + email)) return res.status(400).json({ error: 'invalid_fields' });
+  const [firstname, ...other] = name.split(/\s+/);
   const fields = [
     { name: 'firstname', value: firstname },
     { name: 'lastname', value: other.join(' ') || '-' },
     { name: 'email', value: email },
-    { name: 'message', value: 'Interest: ' + interest + '\\n\\n' + message }
+    { name: 'message', value: 'Interest: ' + interest + '\n\n' + message }
   ];
   try {
     const upstream = await fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + HUB_ID + '/' + FORM_ID, {
