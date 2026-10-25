@@ -2905,7 +2905,10 @@ if (choices) {
 const form = document.querySelector('#contact-form');
 if (form) {
   form.querySelectorAll('[data-enhanced]').forEach(button => { button.hidden = false; });
-  form.addEventListener('submit', e => e.preventDefault());
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    document.querySelector('#prepare-inquiry')?.click();
+  });
   const status = document.querySelector('#form-status');
   function inquiry() {
     if (!form.reportValidity()) return null;
