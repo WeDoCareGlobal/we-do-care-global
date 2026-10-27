@@ -6,6 +6,9 @@
     const frame = video?.closest('.film-frame');
     if (!video || !frame || frame.querySelector('.film-video-play')) return;
     video.preload = 'metadata';
+    // Keep browser-native controls available even if autoplay or the custom UI fails.
+    video.controls = true;
+    video.playsInline = true;
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'film-video-play';
